@@ -29,7 +29,7 @@
     a. include captcha
        https://github.com/django-recaptcha/django-recaptcha
     b. clean up styles~~ scrap contact page
-    Change contact page to mailto link "<a href="mailto:john@example.com">John</a>"
+    Change contact page to mailto link "`<a href="mailto:john@example.com">John</a>`"
 3. refine banner styles
 4. reconsider if icons are desired.
     a. maybe make an image cropping tool in the creation form and just have one uploaded image?

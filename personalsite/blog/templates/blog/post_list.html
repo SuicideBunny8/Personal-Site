@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %}
+{% block title %}EM's Blog Post List{% endblock %}
+{% block description %}Blog Post List for Emela's Tech Projects, Maker, Electronics, 3D Printing, DIY{% endblock %}
+
+{% block content %}
+
+<div>
+    <ul class="no-bullets">
+        {% for post_obj in posts %}
+            <li>{% include "blog/post_list_preview.html" with post=post_obj %}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock content %}

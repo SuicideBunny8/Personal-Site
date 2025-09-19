@@ -1,0 +1,238 @@
+/* https://www.w3schools.com/CSSref/index.php */
+
+:root {
+    --c1: #2a3140; /* Headers */
+    --c2: #3c4959; /* Borders */
+    --c3: #728ea6; /* Highlights */
+    --c4: #aeb7bf; /* Nav Bar Background */
+    --c5: #ffffff; /* Page Background */
+}  
+
+html {
+    height: 100%;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  background-color: var(--c5);
+}
+
+h1, h2 {
+    margin: 10px;
+    color: var(--c1);
+    
+    /* override purple highlight */
+    & a:visited {
+        color: var(--c1);
+    }
+}
+
+a {
+    text-decoration: none;
+    color: var(--c2); /* TODO: find good color */
+}
+
+h3 {
+    margin: 8px 0px 0px 0px;
+    color: var(--c1);
+}
+
+p {
+    text-wrap: pretty;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-bottom: 0px;
+}
+
+.wrapper {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.content {
+    width: 1000px;
+    /*height: 100%;*/
+    box-shadow: 0px 0px 2px 1px var(--c4);
+    padding-left: 50px;
+    padding-right: 50px;
+    /*overflow: auto;*/
+    flex: 1;
+}
+
+.no-bullets {
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+
+.logo {
+    width: 60px;
+    height: 60px;
+    padding: 8px;
+}
+
+.nav-bar {
+    width: 100%;
+    min-width: 650px;
+    background-color: var(--c4);
+    
+    & h1 {
+        align-content: center;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-right: 20px;
+        text-wrap: none;
+    }
+}
+
+.nav-menu {
+    position: relative;
+}
+
+.nav-item {
+    width: 100%;
+    
+    
+    & h2 {
+        margin: 5px 20px 5px 20px; /* T R B L*/
+    }
+    
+    & a {
+        display: inline-block;
+        align-content: center;
+        width: 100%;
+        height:100%;
+    }
+}
+
+.nav-item:hover {
+    background-color: var(--c3);
+}
+
+.menu-icon {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 24px;
+    
+    & span {
+        height: 3px;
+        width: 100%;
+        border-radius: 10px;
+        background-color: var(--c1);
+    }
+}
+
+.divider {
+    display: flex;
+    height: 2px;
+    width: 350px;
+    margin-left: 8px;
+    margin-bottom: 20px;
+    background-image: linear-gradient(to right, var(--c3) , var(--c5));
+}
+
+.box {
+    display: flex;
+    /* border: 1px solid black; /* NOTE: Border adds extra width to the screen so a scroll bar is always present, remove before release */ */
+}
+
+.featured {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    & .box {
+        padding: 5px;
+        border-radius: 10px;
+        max-width: 301px;
+        border: 2px solid var(--c2);
+    }
+}
+
+.popular.box {
+    margin: 8px;
+    & .rows {
+        padding: 3px;
+    }
+}
+
+.banner {
+    display: block;
+    margin: auto;
+    width: 98%;
+    height: 100px;
+    object-fit: cover;
+    object-position: 100% 0;
+    /* border: 1px solid magenta; */
+}
+
+.icon {
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+}
+
+/*.preview {
+    margin-bottom: 8px;
+}*/
+
+.cols {
+    flex-direction: column;
+}
+
+.popular.cols {
+    row-gap: 10px;
+}
+
+.rows {
+    flex-direction: row;
+    align-items: center;
+}
+
+.center {
+    align-items: center;
+}
+
+@media (max-width: 744px) {
+    /* TODO: determine styles for smaller media */
+    body { /* debug */
+      /* background-color: lightblue; */
+    }
+    
+    /* Collapsible Nav Bar */
+    .nav-bar {
+        flex-direction: column;
+        min-width: 450px;
+    }
+    
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+    }
+    
+    .nav-item {
+        text-align: center;
+        padding: 0px 0px 0px 0px;
+    }
+    
+    .nav-menu.active {
+        display: flex;
+    }
+    
+    .menu-icon {
+        display: flex;
+    }
+}
+
+@media (max-width: 1100px) {
+    .content {
+        width: 100%;
+    }
+}

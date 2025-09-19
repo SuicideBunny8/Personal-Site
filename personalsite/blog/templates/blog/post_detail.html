@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %}
+{% block title %}{{ post.meta_title|title }}{% endblock %}
+{% block description %}{{ post.meta_description }}{% endblock %}
+
+{% block content %}
+<div>
+    <img src="{{ post.banner.url }}" class="banner">
+    <h1>{{ post.title|title }}</h1>
+    <span class="divider"></span>
+    <h3><time datetime="{{ post.pub_date|date:"Y-m-d" }}">{{ post.pub_date|date:"F j, Y" }}</time></h3>
+    <p>
+        {{ post.text|safe }}
+    </p>
+</div>
+
+{% endblock content %}

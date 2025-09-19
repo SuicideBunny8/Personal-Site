@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="{% block author %}Emela Moreyra{% endblock %}">
+        <meta name="description" content="{% block description %}Description{% endblock %}">
+        <title>{% block title %}Tab Title{% endblock %}</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+        <script src="{% static 'script.js' %}" defer></script>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="nav-bar box">
+                <div class="box">
+                    <div class="box"><img src="{% static 'E_clean.png' %}" class="logo"></div>
+                    <div class="box">
+                        <h1>Some Name</h1>
+                    </div>
+                </div>
+                <div class="nav-menu box">
+                    <div class="nav-item box cols">
+                        <a href="{% url 'homepage' %}"><h2>Home</h2></a>
+                    </div>
+                    <div class="nav-item box cols">
+                        <a href="{% url 'post_list_view' %}"><h2>Posts</h2></a>
+                    </div>
+                    <div class="nav-item box cols">
+                        <a href="#"><h2>About</h2></a>
+                    </div>
+                    <div class="nav-item box cols">
+                        <a href="{% url 'contact_page' %}"><h2>Contact</h2></a>
+                    </div>
+                </div>
+                <div>
+                    <a href="#" class="menu-icon">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="wrapper center"><div class="content">
+                {% block content %}
+                    <em>Oops! No Content Found</em>
+                {% endblock content %}
+            </div></div>
+
+            {% if messages %}
+                <div>
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            
+            <footer class="footer">
+                <!-- TODO -->
+            </footer>
+        </div>
+    </body>
+</html>

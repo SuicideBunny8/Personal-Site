@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %}
+{% block title %}EM's Blog Home{% endblock %}
+{% block description %}Blog Homepage for Emela's Tech Projects, Maker, Electronics, 3D Printing, DIY{% endblock %}
+
+{% block content %}
+<h1 class="featured">Featured Posts</h1>
+<span class="divider"></span>
+<div class="box featured">
+    {% for post_obj in featured_posts %}
+        {% include "blog/featured.html" with post=post_obj %}
+    {% endfor %}
+</div>
+<h1 class="popular">New Posts</h1>
+<span class="divider"></span>
+<div class="box popular cols">
+    {% for post_obj in recent_posts %}
+        {% include "blog/post_list_preview.html" with post=post_obj %}
+    {% endfor %}
+</div>
+<a href="#"><h2>More posts...</h2></a>
+{% endblock content %}

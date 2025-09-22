@@ -14,7 +14,7 @@
 </div>
 <h1 class="popular">New Posts</h1>
 <span class="divider"></span>
-<div class="box popular cols">
+<div class="box popular col">
     {% for post_obj in recent_posts %}
         {% include "blog/post_list_preview.html" with post=post_obj %}
     {% endfor %}

@@ -53,11 +53,13 @@ p {
 }
 
 .content {
-    width: 1000px;
+    width: 1100px;
     /*height: 100%;*/
     box-shadow: 0px 0px 2px 1px var(--c4);
-    padding-left: 50px;
-    padding-right: 50px;
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*padding-left: 50px;*/
+    /*padding-right: 50px;*/
     /*overflow: auto;*/
     flex: 1;
 }
@@ -141,7 +143,7 @@ p {
 
 .box {
     display: flex;
-    /* border: 1px solid black; /* NOTE: Border adds extra width to the screen so a scroll bar is always present, remove before release */ */
+    /* border: 1px solid black;*/ /* NOTE: Border adds extra width to the screen so a scroll bar is always present, remove before release */
 }
 
 .featured {
@@ -165,9 +167,9 @@ p {
 
 .banner {
     display: block;
-    margin: auto;
-    width: 98%;
-    height: 100px;
+    margin: 0px 0px 0px 0px;
+    /*height: 140px;*/
+    aspect-ratio: 3 / 1;
     object-fit: cover;
     object-position: 100% 0;
     /* border: 1px solid magenta; */
@@ -179,15 +181,15 @@ p {
     padding: 5px;
 }
 
-/*.preview {
-    margin-bottom: 8px;
-}*/
+.narrow {
+    width: 800px;
+}
 
-.cols {
+.col {
     flex-direction: column;
 }
 
-.popular.cols {
+.popular.col {
     row-gap: 10px;
 }
 

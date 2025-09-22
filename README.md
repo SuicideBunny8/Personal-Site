@@ -35,19 +35,19 @@
    b. building this website?
 
    c. about me page
-3. ~~revamp contact page
+3. √ revamp contact page
     a. include captcha
        https://github.com/django-recaptcha/django-recaptcha
     b. clean up styles~~ scrap contact page
    
-    Change contact page to mailto link "`<a href="mailto:john@example.com">John</a>`"
-4. refine banner styles
-5. reconsider if icons are desired.
+    √ Change contact page to mailto link "`<a href="mailto:john@example.com">John</a>`"
+4. √ refine banner styles
+5. √ reconsider if icons are desired.
 
     a. maybe make an image cropping tool in the creation form and just have one uploaded image?
    
     b. banners and icons as the same image but styled differently?
-7. refine post view style
+7. √ refine post view style
 8. refind post short text length
 9. Make footer
 

@@ -132,6 +132,11 @@ p {
     }
 }
 
+.footer {
+    background-color: var(--c4);
+    padding: 10px;
+}
+
 .divider {
     display: flex;
     height: 2px;
@@ -181,6 +186,12 @@ p {
     padding: 5px;
 }
 
+.social {
+    padding: 10px;
+    width: 30px;
+    height: 30px;
+}
+
 .narrow {
     width: 800px;
 }
@@ -193,7 +204,7 @@ p {
     row-gap: 10px;
 }
 
-.rows {
+.row {
     flex-direction: row;
     align-items: center;
 }

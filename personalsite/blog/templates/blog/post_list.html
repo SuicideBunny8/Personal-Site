@@ -6,10 +6,10 @@
 
 {% block content %}
 <div class="box col center">
-    <ul class="no-bullets narrow">
+    <div class="box col narrow">
         {% for post_obj in posts %}
-            <li>{% include "blog/post_list_preview.html" with post=post_obj %}</li>
+            {% include "blog/post_list_preview.html" with post=post_obj %}
         {% endfor %}
-    </ul>
+    </div>
 </div>
 {% endblock content %}

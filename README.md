@@ -30,7 +30,7 @@
 ### Content
 1. write first posts:
 
-   a. rebuilding my 3d printer?
+   a. rebuilding my 3d printer? - Almost done, want review from alex
 
    b. building this website?
 
@@ -51,7 +51,7 @@
     b. banners and icons as the same image but styled differently?
 5. √ refine post view style
 6. refind post short text length
-7. Make footer
+7. √ Make footer
    
    a. Free icons with attribution
 

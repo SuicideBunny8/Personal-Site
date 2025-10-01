@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor',
     'ckeditor_uploader',
-    'contact',
+    # 'contact',
     'blog',
 ]
 
@@ -181,7 +181,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'resources/'
-STATIC_ROOT = BASE_DIR / 'coll_static'
+STATIC_ROOT = BASE_DIR / 'more_static'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
@@ -209,12 +209,22 @@ MANAGERS = (
 # https://django-ckeditor.readthedocs.io/en/latest/#optional-customizing-ckeditor-editor
 
 # if DEBUG:
-#     CKEDITOR_BASEPATH = ""
+# CKEDITOR_BASEPATH = "/more_static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "embeds/"
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
 
 # TODO
 # CKEDITOR_FILENAME_GENERATOR = 'utils.XXXX'
 CKEDITOR_IMAGE_BACKEND = 'ckeditor_uploader.backends.PillowBackend'
+CKEDITOR_STORAGE_BACKEND = 'django.core.files.storage.FileSystemStorage'
 
-# CKEDITOR_CONFIGS = {}
+CKEDITOR_CONFIGS = {
+    'default':
+        {
+            # 'toolbar': 'full',
+            'width': 'auto',
+            'extraPlugins': ','.join([
+                'codesnippet',
+            ]),
+        },
+}

@@ -1,8 +1,8 @@
-<div class="box rows">
-    <img src="{{ post.icon.url }}" class="icon">
+<div class="box row list">
+    <a href="{{ post.get_absolute_url }}"><img src="{{ post.icon.url }}" class="icon"></a>
     <div class="box col">
-        <h3>{{ post.title|title }}</h3>
+        <a href="{{ post.get_absolute_url }}"><h3>{{ post.title|title }}</h3></a>
         {{ post.short_text|safe }}
-        <p><a href="{{ post.get_absolute_url }}">Read More</a></p>
+        <a href="{{ post.get_absolute_url }}">Read More</a>
     </div>
 </div>

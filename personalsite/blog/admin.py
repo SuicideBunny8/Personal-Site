@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib import admin
-from .models import Post
+from .models import Post, Tag
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 # Register your models here.
@@ -16,6 +16,12 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('title', 'pub_date')
     search_fields = ('title',)
     prepopulated_fields  = {"slug": ("title",)}
+    filter_horizontal = ('tags',)
     form = PostAdminForm
 
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    prepopulated_fields = {"slug": ("name",)}
+
 admin.site.register(Post, PostAdmin)
+admin.site.register(Tag, TagAdmin)

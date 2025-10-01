@@ -6,6 +6,22 @@ import re
 # Create your models here.
 # https://docs.djangoproject.com/en/5.2/ref/models/fields/
 
+class Tag(models.Model):
+    name = models.CharField(
+        max_length=32,
+        unique=True)
+
+    slug = models.SlugField(
+        max_length=32,
+        unique=True,
+        help_text='A label for URL config.')
+
+    def get_absolute_url(self):
+        return reverse('organizer_tag_detail', kwargs={'slug': self.slug})
+
+    def __str__(self):
+        return self.name.title()
+
 class Post(models.Model):
     title = models.CharField(
         max_length=100,
@@ -70,6 +86,11 @@ class Post(models.Model):
         help_text = "Description to be listed in the head meta description. Helps with SEO"
         )
 
+    tags = models.ManyToManyField(
+        Tag,
+        blank=True
+    )
+
     class Meta:
         verbose_name = 'blog post'
         ordering = ['-pub_date', 'title']
@@ -77,8 +98,8 @@ class Post(models.Model):
     
     def short_text(self):
         if len(self.text) > 20: # TODO: refine length
-            short = ' '.join(self.text.split()[:20])
-            short += ' ...'
+            short = ' '.join(self.text.split()[:40])
+            short += '...'
         else:
             short = self.text
 

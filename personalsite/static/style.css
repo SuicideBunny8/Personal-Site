@@ -30,8 +30,9 @@ h1, h2 {
 }
 
 a {
+    display: flex;
     text-decoration: none;
-    color: var(--c2); /* TODO: find good color */
+    color: var(--c2);
 }
 
 h3 {
@@ -44,7 +45,18 @@ p {
     text-align: justify;
     text-justify: inter-word;
     margin-bottom: 0px;
-    /*max-width: 100%;*/
+
+    & a {
+        display: inline-block;
+    }
+
+    & a:after {
+        content: '⇗';
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: inherit;
+        margin-left:2px;
+    }
 }
 
 .wrapper {
@@ -145,7 +157,6 @@ p {
 
 .box {
     display: flex;
-    min-width: 0;
     /* border: 1px solid black;*/ /* NOTE: Border adds extra width to the screen so a scroll bar is always present, remove before release */
 }
 
@@ -169,7 +180,7 @@ p {
 }
 
 .banner {
-    display: block;
+    width: 100%;
     margin: 0px 0px 0px 0px;
     aspect-ratio: 3 / 1;
     object-fit: cover;
@@ -180,6 +191,7 @@ p {
     width: 100px;
     height: 100px;
     padding: 5px;
+    margin-top: 3px;
 }
 
 .social {
@@ -199,6 +211,10 @@ p {
 
 .popular.col {
     row-gap: 10px;
+}
+
+.list {
+    margin-bottom: 1rem;
 }
 
 .row {

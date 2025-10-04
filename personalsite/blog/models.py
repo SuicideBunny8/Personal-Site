@@ -17,7 +17,7 @@ class Tag(models.Model):
         help_text='A label for URL config.')
 
     def get_absolute_url(self):
-        return reverse('organizer_tag_detail', kwargs={'slug': self.slug})
+        return reverse('tag_detail', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.name.title()

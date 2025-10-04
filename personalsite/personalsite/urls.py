@@ -19,26 +19,29 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import urls as auth_urls
 from django.contrib.auth.decorators import login_required
+from django.contrib.flatpages import views as flatpage_views
+from django.contrib.flatpages import urls as flatpage_urls
+from django.contrib.sitemaps.views import index as site_index_view
+from django.contrib.sitemaps.views import sitemap as sitemap_view
 from django.contrib import admin
 from django.urls import include, path
-from django.contrib.flatpages import urls as flatpage_urls
 from django.urls import include, path
 from django.views.decorators.cache import never_cache
 
 from ckeditor_uploader import views as ckeditor_views
-from django.contrib.flatpages import views as flatpage_views
-# from contact import urls as contact_urls
 from debug_toolbar.toolbar import debug_toolbar_urls
 
+from .sitemaps import sitemaps as sitemaps_dict
 
 urlpatterns = [
     path('', include("blog.urls")),
     path('admin/'  , admin.site.urls),
-    # path('contact/', include(contact_urls)),
+    # path('contact/', include(contact.urls)),
     path('ckeditor/upload/', login_required(ckeditor_views.upload), name='ckeditor_upload'),
     path('ckeditor/browse/', never_cache(login_required(ckeditor_views.browse)), name='ckeditor_browse'),
     # flatpages
-    path("about/", flatpage_views.flatpage, kwargs={"url": "/about/"}, name="about")
+    path('about/', flatpage_views.flatpage, kwargs={"url": "/about/"}, name='about'),
+    path('sitemap.xml', sitemap_view, {'sitemaps': sitemaps_dict})
 ]
 
 if settings.DEBUG:

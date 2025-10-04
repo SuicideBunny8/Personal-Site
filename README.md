@@ -1,4 +1,4 @@
-## TODO: (note necessarily in order)
+## TODO: (not necessarily in order)
 
 ### Infrastructure
 1. create real database for posts
@@ -46,16 +46,16 @@
 3. √ refine banner styles
 4. √ reconsider if icons are desired.
 
-    a. maybe make an image cropping tool in the creation form and just have one uploaded image?
+    a. ~~maybe make an image cropping tool in the creation form and just have one uploaded image?~~
    
     b. banners and icons as the same image but styled differently?
 5. √ refine post view style
-6. refind post short text length
+6. √ refine post short text length
 7. √ Make footer
    
-   a. Free icons with attribution
+    a. Free icons with attribution
 
-   https://www.flaticon.com/packs/social-16
+    https://www.flaticon.com/packs/social-16
 
 
 ### Stretch Goals
@@ -73,8 +73,9 @@
    https://github.com/shtalinberg/django-el-pagination
 5. Include robots.txt to block AI training crawlers
 
-   https://learndjango.com/tutorials/add-robotstxt-django-website
+    a. get updated list of ai robots from this repo
 
-   https://developers.google.com/search/docs/crawling-indexing/robots/create-robots-txt
-6. django-htmx for more fancy stuff?
+       https://github.com/ai-robots-txt/ai.robots.txt/tree/main
 
+       tested on script to auto pull
+    b. need to append sitemap to list

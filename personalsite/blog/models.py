@@ -113,7 +113,7 @@ class Post(models.Model):
                 match = tagstr.replace("/", "")
                 
                 temp_stack = []
-                while not tag_stack[-1] == match:
+                while len(tag_stack) > 0 and not tag_stack[-1] == match:
                     temp_stack.append(tag_stack.pop())
                 
                 if len(tag_stack) > 0:

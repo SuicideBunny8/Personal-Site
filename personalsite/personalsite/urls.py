@@ -29,7 +29,6 @@ from django.urls import include, path
 from django.views.decorators.cache import never_cache
 
 from ckeditor_uploader import views as ckeditor_views
-from debug_toolbar.toolbar import debug_toolbar_urls
 
 from .sitemaps import sitemaps as sitemaps_dict
 
@@ -45,5 +44,6 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
+    from debug_toolbar.toolbar import debug_toolbar_urls
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += debug_toolbar_urls()

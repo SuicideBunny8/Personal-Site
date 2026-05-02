@@ -10,7 +10,7 @@ class HomeView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # add stuff
-        context["featured_posts"] = self.get_queryset().filter(featured=True)#.filer(draft=False) # remove draft for testing
+        context["featured_posts"] = self.get_queryset().filter(featured=True)#.filer(draft=False) # TODO: uncomment before release
         context["recent_posts"] = self.get_queryset().filter(draft=False)[:5]
         return context
 
@@ -19,6 +19,8 @@ class PostView(DetailView):
     model = Post
 
 class PostListView(ListView):
+    #queryset = Post.objects.filter(draft=False) # TODO: uncomment before release
+    paginate_by = 10
     template_name = "blog/post_list.html"
     model = Post
     ordering = "-pub_date"

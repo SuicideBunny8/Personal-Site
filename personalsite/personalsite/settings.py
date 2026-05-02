@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
+
 from pathlib import Path
 from .log_filters import ManageSQLFilter
 
@@ -21,7 +23,7 @@ DOMAIN_NAME = 'sudo.com' # TODO
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-f58!svc35q9p+!f8$s_)3$gd!@q20s8gif+6kc@r!f3z*of-d5'
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -69,6 +71,16 @@ ROOT_URLCONF = 'personalsite.urls'
 
 SITE_ID = 1
 
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = 'DENY'
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -82,7 +94,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             "loaders": [
-                #("django.template.loaders.cached.Loader", [ # uncomment these for deploy
+                #("django.template.loaders.cached.Loader", [ # TODO: uncomment these for deploy
                     "django.template.loaders.filesystem.Loader",
                     "django.template.loaders.app_directories.Loader",
                 #]),

@@ -1,5 +1,10 @@
 ## TODO: (not necessarily in order)
 
+### Code Review
+1. all references to post icons need the guard `{% if post.icon %}<img src="{{ post.icon.url }}" class="icon">{% endif %}` but needs a default icon for when there is none
+2. revive the contact page to better obfuscate email from bot scrapers
+
+
 ### Infrastructure
 1. create real database for posts
 2. create file system database for uploaded files for blog posts
@@ -30,7 +35,7 @@
 ### Content
 1. write first posts:
 
-   a. rebuilding my 3d printer? - Almost done, want review from alex
+   a. √ rebuilding my 3d printer? - Almost done, want review from alex
 
    b. building this website?
 

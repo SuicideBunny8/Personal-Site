@@ -7,7 +7,9 @@
 {% block content %}
 <div class="box col center">
 <div class="box col narrow">
-    <img src="{{ post.banner.url }}" class="banner">
+    {% if post.banner %}
+        <img src="{{ post.banner.url }}" class="banner">
+    {% endif %}
     <h1>{{ post.title|title }}</h1>
     <span class="divider"></span>
     <h3><time datetime="{{ post.pub_date|date:"Y-m-d" }}">{{ post.pub_date|date:"F j, Y" }}</time></h3>

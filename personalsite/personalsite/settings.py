@@ -22,11 +22,15 @@ DOMAIN_NAME = 'sudo.com' # TODO
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# stored in script under /etc/profile.d/personal_site_vars.sh
+# new key generated with:
+#   from django.core.management.utils import get_random_secret_key;
+#   print(get_random_secret_key())
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# debug run must be set in python virtual environment
+# add to activate script `export DJANGO_DEBUG=True`
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['127.0.0.1', DOMAIN_NAME]
 

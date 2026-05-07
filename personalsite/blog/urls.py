@@ -23,4 +23,7 @@ urlpatterns = [
     path('', views.HomeView.as_view(), name='homepage'),
     path('post/<slug:slug>/', views.PostView.as_view(), name='post_view'),
     path('post_list/', views.PostListView.as_view(), name='post_list_view'),
+    # TODO: tags needs fleshing out
+    # path('tag/')
+    # path('tag_list') 
 ] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

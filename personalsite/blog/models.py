@@ -1,10 +1,19 @@
 from django.db import models
+from django.utils import timezone
 from django.urls import reverse
+
+from .utils import strip_tags
 
 import re
 
 # Create your models here.
 # https://docs.djangoproject.com/en/5.2/ref/models/fields/
+
+class PostStatus(models.TextChoices):
+    DRAFT     = 'draft',    'Draft'
+    PUBLISHED = 'published','Published'
+    FEATURED  = 'featured', 'Featured'
+    ARCHIVED  = 'archived', 'Archived'
 
 class Tag(models.Model):
     name = models.CharField(
@@ -17,10 +26,13 @@ class Tag(models.Model):
         help_text='A label for URL config.')
 
     def get_absolute_url(self):
-        return reverse('tag_detail', kwargs={'slug': self.slug})
+        # TODO: tags needs fleshing out
+        #return reverse('tag_detail', kwargs={'slug': self.slug})
+        # placeholder while tags pages are not user exposed to prevent potential accidental crashes
+        return reverse('homepage')
 
     def __str__(self):
-        return self.name.title()
+        return self.name
 
 class Post(models.Model):
     title = models.CharField(
@@ -30,6 +42,7 @@ class Post(models.Model):
     
     slug = models.SlugField(
         max_length=100,
+        unique=True,
         help_text='A label for URL config'
         )
     
@@ -40,49 +53,48 @@ class Post(models.Model):
     
     pub_date = models.DateField(
         'date published',
-        auto_now_add=True,
+        default=timezone.localdate,
+        blank=True,
+        db_index=True
         )
-    
+
     rank = models.PositiveIntegerField(
         default=0,
-        #editable=False,
+        editable=False,
         help_text = "What order to list popular posts in. not yet implemented"
         )
     
     # Flags
-    draft = models.BooleanField(
-        default=True,
-        help_text='Set True to keep the post from being listed on the site. Use for in progress posts'
-        )
-    
-    featured = models.BooleanField(
-        default=False,
-        help_text='Set True if the post should be highlighted on the front page of the site'
-        )
+    status = models.CharField(
+        max_length=16,
+        choices=PostStatus.choices,
+        default=PostStatus.DRAFT,
+        db_index=True
+    )
     
     # Key Media
     banner = models.ImageField(
-        upload_to='post_banners',
+        upload_to=banner_upload_path,
         blank=True,
         help_text = "Image to be displayed on featured cards and at the top of post pages."
         )
     
     icon = models.ImageField(
-        upload_to='post_icons',
-        blank=True,
+        upload_to=icon_upload_path,
+        blank=False,
         help_text = "Image to be displayed in post list cards"
         )
     
     # meta fields
     meta_title = models.CharField(
         max_length=60,
-        default="CHANGE ME",
+        blank=True,
         help_text = "Title to be displayed in tab label and search results. Helps SEO"
         )
 
     meta_description = models.CharField(
         max_length=150,
-        default="CHANGE ME",
+        blank=True,
         help_text = "Description to be listed in the head meta description. Helps with SEO"
         )
 
@@ -91,48 +103,44 @@ class Post(models.Model):
         blank=True
     )
 
+    # automatically assigned at save
+    updated_at = models.DateTimeField(
+        auto_now=True
+        )
+    
+    short_text = models.TextField(
+        blank=True,
+        editable=False
+        )
+
+    def banner_upload_path(instance, filename):
+        return f"post_banners/{instance.slug}/{filename}"
+
+    def icon_upload_path(instance, filename):
+        return f"post_icons/{instance.slug}/{filename}"
+
     class Meta:
         verbose_name = 'blog post'
         ordering = ['-pub_date', 'title']
         get_latest_by = 'pub_date'
-    
-    def short_text(self):
-        if len(self.text) > 20: # TODO: refine length
-            short = ' '.join(self.text.split()[:40])
-            short += '...'
-        else:
-            short = self.text
-
-        # process to terminate any unclosed tags
-        tag_stack = []
-
-        for tag in re.finditer(r"(<\w+>)|(<\/\w+>)", short):
-            tagstr = tag.group()
-            if tagstr[1] == "/":
-                #terminator
-                match = tagstr.replace("/", "")
-                
-                temp_stack = []
-                while len(tag_stack) > 0 and not tag_stack[-1] == match:
-                    temp_stack.append(tag_stack.pop())
-                
-                if len(tag_stack) > 0:
-                    tag_stack.pop()
-                
-                while len(temp_stack) > 0:
-                    tag_stack.append(temp_stack.pop())
-                
-                pass
-            else:
-                #opener
-                tag_stack.append(tagstr)
-
-        for unclosed in tag_stack[::-1]:
-            short += (unclosed[:1] + "/" + unclosed[1:])
-        return short
+        indexes = [
+            models.Index(
+                fields=['-pub_date', 'status'],
+                name='post_pubdate_status_idx'
+            ),
+        ]
     
     def get_absolute_url(self):
         return reverse('post_view', kwargs={'slug': self.slug})
 
+    def save(self, *args, **kwargs):
+        self.short_text = ' '.join(strip_tags(self.text).split()[:40]) + '...'
+        if not self.meta_title:
+            self.meta_title = self.title[:60]
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.title
+
+    def __repr__(self):
+        return self.__str__()

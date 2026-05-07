@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView, DetailView, ListView
-from .models import Post
+from .models import Post, PostStatus
 
 # Create your views here.
 class HomeView(ListView):
@@ -10,7 +10,7 @@ class HomeView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # add stuff
-        context["featured_posts"] = self.get_queryset().filter(featured=True)#.filer(draft=False) # TODO: uncomment before release
+        context["featured_posts"] = self.get_queryset().filter(status=PostStatus.FEATURED)
         context["recent_posts"] = self.get_queryset().filter(draft=False)[:5]
         return context
 
@@ -19,7 +19,7 @@ class PostView(DetailView):
     model = Post
 
 class PostListView(ListView):
-    #queryset = Post.objects.filter(draft=False) # TODO: uncomment before release
+    queryset = Post.objects.filter(status=PostStatus.PUBLISHED)
     paginate_by = 10
     template_name = "blog/post_list.html"
     model = Post

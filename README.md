@@ -1,8 +1,7 @@
 ## TODO: (not necessarily in order)
 
 ### Code Review
-1. all references to post icons need the guard `{% if post.icon %}<img src="{{ post.icon.url }}" class="icon">{% endif %}` but needs a default icon for when there is none
-2. revive the contact page to better obfuscate email from bot scrapers
+1. revive the contact page to better obfuscate email from bot scrapers
 
 
 ### Infrastructure
@@ -84,3 +83,4 @@
 
        tested on script to auto pull
     b. need to append sitemap to list
+6. tags pages need fleshing out. currently not exposed on site and only handled internally

@@ -151,18 +151,16 @@ LOGGING = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'personalsite',      # the database you created
-        'USER': 'django_user',       # the dedicated user
-        'PASSWORD': os.environ['DB_PASSWORD'],  # from your .env file
+        'NAME': 'personalsite',
+        'USER': 'django_user',
+        'PASSWORD': os.environ['DB_PASSWORD'],
         'HOST': 'localhost',
         'PORT': '5432',
     }
-"""
-    {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-"""
+    # {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
 }
 
 

@@ -35,6 +35,12 @@ class Tag(models.Model):
         return self.name
 
 class Post(models.Model):
+    def banner_upload_path(instance, filename):
+        return f"post_banners/{instance.slug}/{filename}"
+
+    def icon_upload_path(instance, filename):
+        return f"post_icons/{instance.slug}/{filename}"
+    
     title = models.CharField(
         max_length=100,
         help_text = "Title to be displayed on the psot itself"
@@ -112,12 +118,6 @@ class Post(models.Model):
         blank=True,
         editable=False
         )
-
-    def banner_upload_path(instance, filename):
-        return f"post_banners/{instance.slug}/{filename}"
-
-    def icon_upload_path(instance, filename):
-        return f"post_icons/{instance.slug}/{filename}"
 
     class Meta:
         verbose_name = 'blog post'

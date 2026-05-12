@@ -4,6 +4,10 @@
 1. revive the contact page to better obfuscate email from bot scrapers
 
 
+### Fixes
+1. ckeditor 5 available https://pypi.org/project/django-ckeditor-5/
+2. django debug toolbar setup https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#
+
 ### Infrastructure
 1. create real database for posts
 2. create file system database for uploaded files for blog posts

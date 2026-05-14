@@ -154,7 +154,7 @@ DATABASES = {
         'NAME': 'personalsite',
         'USER': 'django_user',
         'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     }
     # {

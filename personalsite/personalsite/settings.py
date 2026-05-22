@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'ckeditor',
     'ckeditor_uploader',
+    'storages',
     # 'contact',
     'blog',
 ]
@@ -164,12 +165,40 @@ DATABASES = {
 }
 
 
+##### S3 Storage #####
+STORAGES = {
+    "default": {
+        "BACKEND": 'storages.backends.s3boto3.S3Boto3Storage'
+    },
+    "staticfiles": {
+        "BACKEND": 'django.contrib.staticfiles.storage.StaticFilesStorage'
+    }
+}
+
+AWS_ACCESS_KEY_ID       = os.environ['GARAGE_ACCESS_KEY']
+AWS_SECRET_ACCESS_KEY   = os.environ['GARAGE_SECRET_KEY']
+AWS_STORAGE_BUCKET_NAME = 'personal-site-bucket'
+AWS_S3_ENDPOINT_URL     = 'http://localhost:3900'
+AWS_S3_ADDRESSING_STYLE = 'path'
+
+
+
 ##### Media #####
 # https://docs.djangoproject.com/en/5.2/topics/files/
 
 # TODO need to figure out full file upload stuff
-MEDIA_ROOT = BASE_DIR / 'media/'
-MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media' # ignored for S3
+MEDIA_URL = '/media/'
+
+
+##### Static files (CSS, JavaScript, Images) #####
+# https://docs.djangoproject.com/en/5.1/howto/static-files/
+
+STATIC_URL = '/resources/'
+STATIC_ROOT = BASE_DIR / 'static-files'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 ##### Password validation #####
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -202,14 +231,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-##### Static files (CSS, JavaScript, Images) #####
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = 'resources/'
-STATIC_ROOT = BASE_DIR / 'more_static'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
 
 ###### Default primary key field type #####
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -241,7 +262,7 @@ CKEDITOR_ALLOW_NONIMAGE_FILES = False
 # TODO
 # CKEDITOR_FILENAME_GENERATOR = 'utils.XXXX'
 CKEDITOR_IMAGE_BACKEND = 'ckeditor_uploader.backends.PillowBackend'
-CKEDITOR_STORAGE_BACKEND = 'django.core.files.storage.FileSystemStorage'
+CKEDITOR_STORAGE_BACKEND = 'storages.backends.s3boto3.S3Boto3Storage'
 
 CKEDITOR_CONFIGS = {
     'default':

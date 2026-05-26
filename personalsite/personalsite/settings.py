@@ -76,6 +76,7 @@ ROOT_URLCONF = 'personalsite.urls'
 
 SITE_ID = 1
 
+"""
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
@@ -84,7 +85,7 @@ if not DEBUG:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_BROWSER_XSS_FILTER = True
     X_FRAME_OPTIONS = 'DENY'
-
+#"""
 
 TEMPLATES = [
     {
@@ -181,7 +182,7 @@ AWS_STORAGE_BUCKET_NAME = 'personal-site-bucket'
 AWS_S3_ENDPOINT_URL     = 'http://localhost:3900'
 AWS_S3_ADDRESSING_STYLE = 'path'
 
-
+AWS_QUERYSTRING_AUTH = False # required for ckeditor to work with S3
 
 ##### Media #####
 # https://docs.djangoproject.com/en/5.2/topics/files/
@@ -270,7 +271,7 @@ CKEDITOR_CONFIGS = {
             # 'toolbar': 'full',
             'width': 'auto',
             'extraPlugins': ','.join([
-                'codesnippet',
+                'codesnippet', 'uploadimage'
             ]),
         },
 }

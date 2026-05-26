@@ -11,7 +11,7 @@ class HomeView(ListView):
         context = super().get_context_data(**kwargs)
         # add stuff
         context["featured_posts"] = self.get_queryset().filter(status=PostStatus.FEATURED)
-        context["recent_posts"] = self.get_queryset().filter(draft=False)[:5]
+        context["recent_posts"] = self.get_queryset().filter(status=PostStatus.PUBLISHED)[:5]
         return context
 
 class PostView(DetailView):

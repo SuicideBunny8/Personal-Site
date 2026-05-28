@@ -48,11 +48,13 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    'captcha',
     'ckeditor',
     'ckeditor_uploader',
     'storages',
-    # 'contact',
+    'contact',
     'blog',
+    'admin_honeypot',
 ]
 
 MIDDLEWARE = [
@@ -111,6 +113,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'personalsite.wsgi.application'
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 ##### Logging #####
 # Python logging handlers
@@ -142,7 +146,7 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['console'],
-            'level': 'DEBUG' # INFO, WARNING, ERROR
+            'level': 'INFO' # DEBUG, INFO, WARNING, ERROR
         }
     }
 }

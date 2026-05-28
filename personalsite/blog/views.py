@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView, DetailView, ListView
+from django.db.models import Q
 from .models import Post, PostStatus
 
 # Create your views here.
@@ -16,10 +17,11 @@ class HomeView(ListView):
 
 class PostView(DetailView):
     template_name = "blog/post_detail.html"
+    queryset = Post.objects.filter(Q(status=PostStatus.PUBLISHED) | Q(status=PostStatus.FEATURED))
     model = Post
 
 class PostListView(ListView):
-    queryset = Post.objects.filter(status=PostStatus.PUBLISHED)
+    queryset = Post.objects.filter(Q(status=PostStatus.PUBLISHED) | Q(status=PostStatus.FEATURED))
     paginate_by = 10
     template_name = "blog/post_list.html"
     model = Post

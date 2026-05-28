@@ -33,7 +33,7 @@
                         <a href="{% url 'about' %}"><h2>About</h2></a>
                     </div>
                     <div class="nav-item box col">
-                        <a href="mailto:emelavm@gmail.com"><h2>Contact</h2></a>
+                        <a href="{% url 'contact_page' %}"><h2>Contact</h2></a> {# old mailto link mailto:emelavm@gmail.com #}
                     </div>
                 </div>
                 <div>
@@ -52,13 +52,12 @@
             </div>
             
             <footer class="footer">
-                <!-- TODO -->
                 <div class="box wrapper center">
                     <div class="box row">
                          <a href="https://www.linkedin.com/in/emoreyra/"><img title="LinkedIn" alt="LinkedIn Logo" src="{% static 'linkedin.png' %}" class="social"></a><!--Icon made by Pixel perfect from www.flaticon.com -->
                         <a href="https://github.com/SuicideBunny8"><img title="GitHub" alt="GitHub Logo" src="{% static 'github.png' %}" class="social"></a><!--Icon made by Pixel perfect from www.flaticon.com -->
-                        <a href="mailto:emelavm@gmail.com"><img title="Email" alt="Email Icon" src="{% static 'envelope.png' %}" class="social"></a><!--Icon made by Pixel perfect from www.flaticon.com -->
-                        <!--<a href="#"><img title="Buy Me a Coffee" alt="Coffee Icon" src="{% static 'coffee.png' %}" class="social"></a>--><!--Icon made by Pixel perfect from www.flaticon.com -->
+                        <a href="{% url 'contact_page' %}"><img title="Email" alt="Email Icon" src="{% static 'envelope.png' %}" class="social"></a><!--Icon made by Pixel perfect from www.flaticon.com -->
+                        {# <a href="#"><img title="Buy Me a Coffee" alt="Coffee Icon" src="{% static 'coffee.png' %}" class="social"></a>--><!--Icon made by Pixel perfect from www.flaticon.com --> #}
                     </div>
                     &copy; {% now "Y" %} Emela Moreyra
                 </div>

@@ -34,13 +34,15 @@ from .sitemaps import sitemaps as sitemaps_dict
 
 urlpatterns = [
     path('', include("blog.urls")),
-    path('admin/'  , admin.site.urls),
-    # path('contact/', include(contact.urls)),
+    path('admin/'  , include('admin_honeypot.urls', namespace='admin_honeypot')), # honeypot URL
+    path('elephant-pants/', admin.site.urls),
+    path('contact/', include("contact.urls")),
     path('ckeditor/upload/', login_required(ckeditor_views.upload), name='ckeditor_upload'),
     path('ckeditor/browse/', never_cache(login_required(ckeditor_views.browse)), name='ckeditor_browse'),
     # flatpages
     path('about/', flatpage_views.flatpage, kwargs={"url": "/about/"}, name='about'),
-    path('sitemap.xml', sitemap_view, {'sitemaps': sitemaps_dict})
+    path('sitemap.xml', sitemap_view, {'sitemaps': sitemaps_dict}),
+    path('captcha/', include('captcha.urls')),
 ]
 
 if settings.DEBUG:

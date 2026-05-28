@@ -5,10 +5,12 @@
 {% endblock %}
 
 {% block content %}
-    <div>
+    <div class="wrapper center">
         <form action="{% url 'contact_page' %}" method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            <table>
+                {{ form.as_table }}
+            </table>
             <button type="submit">Send Message</button>
         </form>
     </div>

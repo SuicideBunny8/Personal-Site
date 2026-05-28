@@ -254,6 +254,8 @@ MANAGERS = (
     ('Us', 'me@' + DOMAIN_NAME)
 )
 
+ADMIN_EMAIL_RECIPIENT="emelavm@gmail.com"
+
 
 ##### CKEditor settings #####
 # https://github.com/django-ckeditor/django-ckeditor

@@ -1,4 +1,5 @@
 from django import forms
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 
@@ -18,8 +19,9 @@ class ContactForm(forms.Form):
         text    = self.cleaned_data.get('message')
         body_text = f"From: {name}, {email}\n\n{text}"
         try:
-            send_mail(subject, body_text, None, recipient_list=["emelavm@gmail.com"], fail_silently=False)
+            send_mail(subject, body_text, None, recipient_list=[settings.ADMIN_EMAIL_RECIPIENT], fail_silently=False)
             return True
-        except:
+        except SMTPException as e:
+            logger.error("Mail send failed: %s", e)
             self.add_error(None, ValidationError("Could not send mail"))
             return False

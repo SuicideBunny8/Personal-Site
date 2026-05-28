@@ -88,3 +88,6 @@
        tested on script to auto pull
     b. need to append sitemap to list
 6. tags pages need fleshing out. currently not exposed on site and only handled internally
+7. customize 404 page
+
+   https://learndjango.com/tutorials/customizing-django-404-and-500-error-pages

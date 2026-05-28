@@ -1,16 +1,16 @@
 ## TODO: (not necessarily in order)
 
 ### Code Review
-1. revive the contact page to better obfuscate email from bot scrapers
+1. √ revive the contact page to better obfuscate email from bot scrapers
 
 
 ### Fixes
 1. ckeditor 5 available https://pypi.org/project/django-ckeditor-5/
-2. django debug toolbar setup https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#
+2. √ django debug toolbar setup https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#
 
 ### Infrastructure
-1. create real database for posts
-2. create file system database for uploaded files for blog posts
+1. √ create real database for posts
+2. √ create file system database for uploaded files for blog posts
 
    https://github.com/jschneier/django-storages
    
@@ -31,7 +31,7 @@
 
    https://github.com/Fantomas42/django-blog-zinnia
    --not interested
-4. create real admin user
+4. √ create real admin user
 5. √ create post list view
 
 
@@ -45,10 +45,10 @@
    c. about me page
 2. √ revamp contact page
 
-    a. include captcha
+    a. √ include captcha
        https://github.com/django-recaptcha/django-recaptcha
 
-    b. clean up styles~~ scrap contact page
+    b. clean up styles
    
     √ Change contact page to mailto link "`<a href="mailto:john@example.com">John</a>`"
 3. √ refine banner styles

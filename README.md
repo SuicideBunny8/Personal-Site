@@ -22,7 +22,7 @@
    
     https://blog.marco.ninja/notes/technology/django/django-local-s3/
 4. set up raid drives on server comp?
-5. figure out a good domain name and buy it
+5. √ figure out a good domain name and buy it
 
 ### MVP
 1. √ update blog post text type to allow uploaded images

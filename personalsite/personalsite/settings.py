@@ -17,7 +17,7 @@ from .log_filters import ManageSQLFilter
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-DOMAIN_NAME = 'sudo.com' # TODO
+DOMAIN_NAME = 'emelavm.com'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -32,7 +32,7 @@ SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 # add to activate script `export DJANGO_DEBUG=True`
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['127.0.0.1', DOMAIN_NAME]
+ALLOWED_HOSTS = ['127.0.0.1', DOMAIN_NAME, '192.168.1.194']
 
 INTERNAL_IPS = ['127.0.0.1']
 
@@ -173,7 +173,7 @@ DATABASES = {
 ##### S3 Storage #####
 STORAGES = {
     "default": {
-        "BACKEND": 'storages.backends.s3boto3.S3Boto3Storage'
+        "BACKEND": 'personalsite.storage.GarageMediaStorage'
     },
     "staticfiles": {
         "BACKEND": 'django.contrib.staticfiles.storage.StaticFilesStorage'

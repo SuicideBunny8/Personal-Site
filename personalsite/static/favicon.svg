@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="50mm"
+   height="50mm"
+   viewBox="0 0 50 50"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   sodipodi:docname="Favico.svg"
+   inkscape:export-filename="E_S_96.webp"
+   inkscape:export-xdpi="48.767998"
+   inkscape:export-ydpi="48.767998"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.4702523"
+     inkscape:cx="107.12447"
+     inkscape:cy="298.92829"
+     inkscape:window-width="1760"
+     inkscape:window-height="1263"
+     inkscape:window-x="500"
+     inkscape:window-y="78"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g13" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Small_Logo"
+     inkscape:groupmode="layer"
+     id="g13"
+     style="display:inline">
+    <rect
+       style="fill:#2a3140;fill-opacity:1;stroke:none;stroke-width:1;stroke-opacity:1"
+       id="rect9"
+       width="50"
+       height="50"
+       x="-3.5527137e-15"
+       y="-3.5527137e-15"
+       rx="5"
+       ry="5" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.3333px;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.895;stroke-linecap:butt;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       x="10.170544"
+       y="41.573082"
+       id="text13"
+       transform="scale(1.0618235,0.94177611)"><tspan
+         id="tspan13"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.3333px;font-family:Bahnschrift;-inkscape-font-specification:'Bahnschrift, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.895;stroke-linecap:butt;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+         x="10.170544"
+         y="41.573082"
+         sodipodi:role="line">E</tspan></text>
+    <circle
+       style="fill:#728ea6;fill-opacity:1;stroke:none;stroke-width:0.995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       id="circle13"
+       cx="41"
+       cy="9"
+       r="3" />
+  </g>
+</svg>

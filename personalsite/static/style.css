@@ -1,5 +1,7 @@
 /* https://www.w3schools.com/CSSref/index.php */
 
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&display=swap');
+
 :root {
     --c1: #2a3140; /* Headers */
     --c2: #3c4959; /* Borders */
@@ -17,11 +19,14 @@ body {
   padding: 0px;
   height: 100%;
   background-color: var(--c5);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
 }
 
 h1, h2 {
     margin: 10px;
     color: var(--c1);
+    font-weight: 500;
     
     /* override purple highlight */
     & a:visited {
@@ -38,6 +43,7 @@ a {
 h3 {
     margin: 8px 0px 0px 0px;
     color: var(--c1);
+    font-weight: 500;
 }
 
 p {
@@ -91,7 +97,7 @@ p {
     
     & h1 {
         align-content: center;
-        padding-left: 20px;
+        padding-left: 10px;
         padding-right: 20px;
         margin-right: 20px;
         text-wrap: none;
@@ -124,7 +130,7 @@ p {
 
 .menu-icon {
     position: absolute;
-    top: 2rem;
+    top: 1.75rem;
     right: 2rem;
     display: none;
     flex-direction: column;
@@ -137,6 +143,10 @@ p {
         width: 100%;
         border-radius: 10px;
         background-color: var(--c1);
+    }
+
+    & .mid-bar {
+        width: 20px;
     }
 }
 
@@ -154,6 +164,42 @@ p {
     margin-bottom: 20px;
     background-image: linear-gradient(to right, var(--c3) , var(--c5));
 }
+
+.wordmark {
+    display: flex;
+    margin-top: -10px;
+
+    span:nth-child(1) {
+        width: 200px;
+        height: 2px;
+        background-color: var(--c2);
+        /*background-image: linear-gradient(to right, var(--c1) , var(--c3));*/
+        margin-left: 20px;
+    }
+
+    span:nth-child(2) {
+        width: 10px;
+        height: 2px;
+        background-color: var(--c3);
+        margin-left: 5px;
+    }
+
+    span:nth-child(3) {
+        width: 8px;
+        height: 8px;
+        background-color: var(--c3);
+        border-radius: 50%;
+    }
+
+    span:nth-child(4) {
+        width: 6px;
+        height: 6px;
+        background-color: var(--c2);
+        border-radius: 50%;
+        margin-left: 3px;
+    }
+}
+
 
 .box {
     display: flex;
@@ -226,7 +272,7 @@ p {
     align-items: center;
 }
 
-@media (max-width: 744px) {
+@media (max-width: 792px) {
     body { /* debug */
       /* background-color: lightblue; */
     }

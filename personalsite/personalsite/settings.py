@@ -113,9 +113,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'personalsite.wsgi.application'
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
-
 ##### Logging #####
 # Python logging handlers
 # https://docs.python.org/3/library/logging.handlers.html#module-logging.handlers
@@ -191,8 +188,7 @@ AWS_QUERYSTRING_AUTH = False # required for ckeditor to work with S3
 ##### Media #####
 # https://docs.djangoproject.com/en/5.2/topics/files/
 
-# TODO need to figure out full file upload stuff
-MEDIA_ROOT = BASE_DIR / 'media' # ignored for S3
+#MEDIA_ROOT = BASE_DIR / 'media' # ignored for S3
 MEDIA_URL = '/media/'
 
 
@@ -200,7 +196,8 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/resources/'
-STATIC_ROOT = BASE_DIR / 'static-files'
+#STATIC_ROOT = BASE_DIR / 'static-files'
+STATIC_ROOT = Path('/var/www/personalsite/static/')
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]

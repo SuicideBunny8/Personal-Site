@@ -7,6 +7,7 @@
 ### Fixes
 1. ckeditor 5 available https://pypi.org/project/django-ckeditor-5/
 2. √ django debug toolbar setup https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#
+3. move admin honeypot real url to new location and put in secrets file
 
 ### Infrastructure
 1. √ create real database for posts

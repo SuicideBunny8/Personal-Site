@@ -32,10 +32,13 @@ from ckeditor_uploader import views as ckeditor_views
 
 from .sitemaps import sitemaps as sitemaps_dict
 
+import os
+
+
 urlpatterns = [
     path('', include("blog.urls")),
     path('admin/'  , include('admin_honeypot.urls', namespace='admin_honeypot')), # honeypot URL
-    path('elephant-pants/', admin.site.urls),
+    path(os.environ.get('DJANGO_ADMIN_URL', 'elephant-pants') + '/', admin.site.urls),
     path('contact/', include("contact.urls")),
     path('ckeditor/upload/', login_required(ckeditor_views.upload), name='ckeditor_upload'),
     path('ckeditor/browse/', never_cache(login_required(ckeditor_views.browse)), name='ckeditor_browse'),

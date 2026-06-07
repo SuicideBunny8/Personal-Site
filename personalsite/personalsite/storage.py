@@ -1,9 +1,13 @@
 from storages.backends.s3boto3 import S3Boto3Storage
+from django.conf import settings
 
 class GarageMediaStorage(S3Boto3Storage):
-    """
-    Upload via S3 API (authenticated), serve via nginx → Garage web endpoint (public).
-    Overrides url() to return nginx-proxied paths instead of direct S3 API URLs.
-    """
+    # overrides the URL to the nginx proxied location rather than the bucket prefix
     def url(self, name):
-        return f'/media/{name}'
+        return f'{settings.MEDIA_URL}{name}'
+
+class Ckeditor5UploadsStorage(S3Boto3Storage):
+    location = "embeds"
+
+    def url(self, name):
+        return f'{settings.MEDIA_URL}{self.location}/{name}'

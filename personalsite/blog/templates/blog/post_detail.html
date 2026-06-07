@@ -13,9 +13,11 @@
     <h1>{{ post.title|title }}</h1>
     <span class="divider"></span>
     <h3><time datetime="{{ post.pub_date|date:"Y-m-d" }}">{{ post.pub_date|date:"F j, Y" }}</time></h3>
-    <p>
-        {{ post.text|safe }}
-    </p>
+    <div>
+        <p>
+            {{ post.text|safe }}
+        </p>
+    </div>
 </div>
 </div>
 {% endblock content %}

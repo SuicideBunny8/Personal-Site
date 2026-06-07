@@ -5,9 +5,9 @@
 
 
 ### Fixes
-1. ckeditor 5 available https://pypi.org/project/django-ckeditor-5/
+1. √ ckeditor 5 available https://pypi.org/project/django-ckeditor-5/
 2. √ django debug toolbar setup https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#
-3. move admin honeypot real url to new location and put in secrets file
+3. √ move admin honeypot real url to new location and put in secrets file
 
 ### Infrastructure
 1. √ create real database for posts
@@ -80,15 +80,17 @@
 4. endless pagination for post list view
    
    https://github.com/shtalinberg/django-el-pagination
-5. Include robots.txt to block AI training crawlers
+5. Create custom module for robots.txt that stores content in the database and autpmatically pulls a new list when data gets stale, ~1 month
 
     a. get updated list of ai robots from this repo
 
        https://github.com/ai-robots-txt/ai.robots.txt/tree/main
 
        tested on script to auto pull
-    b. need to append sitemap to list
 6. tags pages need fleshing out. currently not exposed on site and only handled internally
 7. customize 404 page
 
    https://learndjango.com/tutorials/customizing-django-404-and-500-error-pages
+8. implement the admin file browser
+   
+   https://django-filebrowser.readthedocs.io/en/latest/quickstart.html

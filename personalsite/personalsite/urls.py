@@ -21,6 +21,7 @@ from django.contrib.auth import urls as auth_urls
 from django.contrib.auth.decorators import login_required
 from django.contrib.flatpages import views as flatpage_views
 from django.contrib.flatpages import urls as flatpage_urls
+from django.contrib.flatpages.sitemaps import FlatPageSitemap
 from django.contrib.sitemaps.views import index as site_index_view
 from django.contrib.sitemaps.views import sitemap as sitemap_view
 from django.contrib import admin
@@ -28,24 +29,25 @@ from django.urls import include, path
 from django.urls import include, path
 from django.views.decorators.cache import never_cache
 
-from ckeditor_uploader import views as ckeditor_views
-
+from .views import robots_txt
 from .sitemaps import sitemaps as sitemaps_dict
 
 import os
 
 
 urlpatterns = [
-    path('', include("blog.urls")),
     path('admin/'  , include('admin_honeypot.urls', namespace='admin_honeypot')), # honeypot URL
-    path(os.environ.get('DJANGO_ADMIN_URL', 'elephant-pants') + '/', admin.site.urls),
+    path(os.environ.get('DJANGO_ADMIN_URL', 'elephant-pants') + '/', admin.site.urls), # import from secrets so not exposed on git
+    path('', include("blog.urls")),
+    # ckeditor 5
+    path("ckeditor5/", include('django_ckeditor_5.urls')),
+    # contact page
     path('contact/', include("contact.urls")),
-    path('ckeditor/upload/', login_required(ckeditor_views.upload), name='ckeditor_upload'),
-    path('ckeditor/browse/', never_cache(login_required(ckeditor_views.browse)), name='ckeditor_browse'),
+    path('captcha/', include('captcha.urls')),
     # flatpages
     path('about/', flatpage_views.flatpage, kwargs={"url": "/about/"}, name='about'),
     path('sitemap.xml', sitemap_view, {'sitemaps': sitemaps_dict}),
-    path('captcha/', include('captcha.urls')),
+    path("robots.txt", robots_txt),
 ]
 
 if settings.DEBUG:

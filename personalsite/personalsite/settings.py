@@ -22,7 +22,7 @@ DOMAIN_NAME = 'emelavm.com'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# stored in script under /etc/profile.d/personal_site_vars.sh
+# debug location stored in script under /etc/profile.d/personal_site_vars.sh
 # new key generated with:
 #   from django.core.management.utils import get_random_secret_key;
 #   print(get_random_secret_key())
@@ -48,13 +48,13 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
-    'captcha',
-    'ckeditor',
-    'ckeditor_uploader',
+    'django_ckeditor_5',
     'storages',
     'contact',
+    'captcha',
     'blog',
     'admin_honeypot',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -72,13 +72,13 @@ if DEBUG:
     MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
 
 CSRF_COOKIE_NAME = "csrftoken"
-CSRF_HEADER_NAME = "X-CSRFToken"
+#CSRF_HEADER_NAME = "X-CSRFToken" # removed for ckeditor 5 uploading
 
 ROOT_URLCONF = 'personalsite.urls'
 
 SITE_ID = 1
 
-"""
+#"""
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
@@ -100,6 +100,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'personalsite.context_processors.admin_email',
             ],
             "loaders": [
                 #("django.template.loaders.cached.Loader", [ # TODO: uncomment these for deploy
@@ -242,39 +243,59 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ##### Email settings #####
 # https://docs.djangoproject.com/en/5.1/topics/email/
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" # Console print
+if DEBUG: EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" # Console print
 #EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend" # Default backend, implicitely inherited unless otherwise specified
+ADMIN_EMAIL_RECIPIENT='me@' + DOMAIN_NAME
 SERVER_EMAIL = "contact@" + DOMAIN_NAME 
 DEFAULT_FROM_EMAIL = "no-reply@" + DOMAIN_NAME
 DEFAULT_SUBJECT_PREFIX = 'Testing'
 MANAGERS = (
-    ('Us', 'me@' + DOMAIN_NAME)
+    ('Us', ADMIN_EMAIL_RECIPIENT)
 )
 
-ADMIN_EMAIL_RECIPIENT="emelavm@gmail.com"
+
 
 
 ##### CKEditor settings #####
-# https://github.com/django-ckeditor/django-ckeditor
-# https://django-ckeditor.readthedocs.io/en/latest/#optional-customizing-ckeditor-editor
+# https://github.com/hvlads/django-ckeditor-5/tree/master
 
-# if DEBUG:
-# CKEDITOR_BASEPATH = "/more_static/ckeditor/ckeditor/"
-CKEDITOR_UPLOAD_PATH = "embeds/"
-CKEDITOR_ALLOW_NONIMAGE_FILES = False
+CKEDITOR_5_FILE_STORAGE = 'personalsite.storage.Ckeditor5UploadsStorage'
 
-# TODO
-# CKEDITOR_FILENAME_GENERATOR = 'utils.XXXX'
-CKEDITOR_IMAGE_BACKEND = 'ckeditor_uploader.backends.PillowBackend'
-CKEDITOR_STORAGE_BACKEND = 'storages.backends.s3boto3.S3Boto3Storage'
-
-CKEDITOR_CONFIGS = {
-    'default':
-        {
-            # 'toolbar': 'full',
-            'width': 'auto',
-            'extraPlugins': ','.join([
-                'codesnippet', 'uploadimage'
-            ]),
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': {
+            'items': [
+                    'heading', '|',
+                    'bold', 'italic', 'underline', 'strikethrough', '|',
+                    'link', 'code','subscript', 'superscript', '|',
+                    'codeBlock', 'blockQuote', 'bulletedList', 'numberedList', 'insertTable', '|',
+                    'insertImage', 'mediaEmbed', '|',
+                    'sourceEditing', 'removeFormat',
+                    ],
+            'shouldNotGroupWhenFull': 'true'
         },
+        'image': { # todo
+            'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
+                        'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side',  '|'],
+            'styles': [
+                'full',
+                'alignLeft',
+                'alignRight',
+                'alignCenter',
+            ]
+        },
+        'heading' : {
+            'options': [
+                { 'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph' },
+                { 'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1' },
+                { 'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2' },
+                { 'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3' }
+            ]
+        }
+    },
 }
+
+
+# Define a constant in settings.py to specify file upload permissions
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = "authenticated"  # Possible values: "staff", "authenticated", "any"
+CKEDITOR_5_ALLOW_ALL_FILE_TYPES = True

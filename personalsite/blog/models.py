@@ -43,7 +43,7 @@ class Post(models.Model):
     
     title = models.CharField(
         max_length=100,
-        help_text = "Title to be displayed on the psot itself"
+        help_text = "Title to be displayed on the post itself"
         )
     
     slug = models.SlugField(
@@ -91,7 +91,7 @@ class Post(models.Model):
         help_text = "Image to be displayed in post list cards"
         )
     
-    # meta fields
+    # html meta fields
     meta_title = models.CharField(
         max_length=60,
         blank=True,

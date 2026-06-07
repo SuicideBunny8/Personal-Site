@@ -1,15 +1,19 @@
 from django import forms
 from django.contrib import admin
 from .models import Post, Tag
-from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from django_ckeditor_5.widgets import CKEditor5Widget
 
 # Register your models here.
 
 class PostAdminForm(forms.ModelForm):
-    text = forms.CharField(widget=CKEditorUploadingWidget())
     class Meta:
         model = Post
         fields = '__all__'
+        widgets = {
+              "text": CKEditor5Widget(
+                  attrs={"class": "django_ckeditor_5"}, config_name="default"
+              )
+          }
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'pub_date')

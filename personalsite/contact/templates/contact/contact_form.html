@@ -4,6 +4,11 @@
     Contact Me
 {% endblock %}
 
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'contact/style.css' %}" />
+{% endblock head %}
+
 {% block content %}
     <div class="wrapper center">
         <form action="{% url 'contact_page' %}" method="post">

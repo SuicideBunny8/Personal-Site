@@ -16,6 +16,6 @@ class ContactView(View):
         if bound_form.is_valid():
             mail_sent = bound_form.send()
             if mail_sent:
-                messages.success(request, "Email Successfuly Sent")
+                messages.success(request, "Thank you for your comments!")
                 return redirect('homepage')
         return render(request, self.template_name, {'form': bound_form})

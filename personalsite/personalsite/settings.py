@@ -244,11 +244,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ##### Email settings #####
 # https://docs.djangoproject.com/en/5.1/topics/email/
 if DEBUG: EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" # Console print
-#EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend" # Default backend, implicitely inherited unless otherwise specified
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend" # Default backend, implicitely inherited unless otherwise specified
 ADMIN_EMAIL_RECIPIENT='me@' + DOMAIN_NAME
 SERVER_EMAIL = "contact@" + DOMAIN_NAME 
 DEFAULT_FROM_EMAIL = "no-reply@" + DOMAIN_NAME
 DEFAULT_SUBJECT_PREFIX = 'Testing'
+#EMAIL_PORT = 25
 MANAGERS = (
     ('Us', ADMIN_EMAIL_RECIPIENT)
 )

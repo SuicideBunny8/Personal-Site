@@ -1,0 +1,12 @@
+/* a bit hacky since I can't directly add a css class to form labels */
+label[for="id_name"]:before, label[for="id_message"]:before, label[for="id_captcha_1"]:before {
+    content:"*";
+    color: red;
+}
+
+.errorlist {
+    list-style-type: none;
+    padding-left: 0px;
+    padding-right: 10px;
+    color: red;
+}

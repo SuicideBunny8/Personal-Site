@@ -9,6 +9,7 @@
         <meta name="description" content="{% block description %}Description{% endblock %}">
         <title>{% block title %}Tab Title{% endblock %}</title>
         {% load static %}
+        {% block head %}{% endblock head %}
         <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
         <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.svg' %}">
         <script src="{% static 'script.js' %}" defer></script>
@@ -51,7 +52,16 @@
                     </a>
                 </div>
             </div>
-            
+            {% if messages %}
+            <div class="message-box">
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
             <div class="wrapper center"><div class="content">
                 {% block content %}
                     <em>Oops! No Content Found</em>

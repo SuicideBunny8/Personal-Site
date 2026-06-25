@@ -6,8 +6,10 @@ from smtplib import SMTPException
 
 from captcha.fields import CaptchaField
 
+from .models import ContactSubmission
 
-class ContactForm(forms.Form):
+
+class ContactForm(forms.ModelForm):
     email = forms.EmailField(required=False, widget=forms.TextInput(attrs={"placeholder": "John.Doe@example.com"}))
     name = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "John Doe", "class": "requried"}))
     message = forms.CharField(widget=forms.Textarea(attrs={"class": "requried"}))
@@ -26,3 +28,17 @@ class ContactForm(forms.Form):
             logger.error("Mail send failed: %s", e)
             self.add_error(None, ValidationError("Could not send mail"))
             return False
+
+    class Meta:
+        model = ContactSubmission
+        fields = ["email", "name", "message"]
+        help_texts = {
+            "email": "Your Email (optional)",
+            "name": "Your Name",
+            "message": "Your Message"
+        }
+        labels = {
+            "email": "Email",
+            "name": "Name",
+            "message": "Message"
+        }

@@ -15,20 +15,6 @@ class ContactForm(forms.ModelForm):
     message = forms.CharField(widget=forms.Textarea(attrs={"class": "requried"}))
     captcha = CaptchaField()
 
-    def send(self):
-        subject = self.cleaned_data.get('subject')
-        email   = self.cleaned_data.get('email')
-        name    = self.cleaned_data.get('name')
-        text    = self.cleaned_data.get('message')
-        body_text = f"From: {name}, {email}\n\n{text}"
-        try:
-            send_mail(subject, body_text, None, recipient_list=[settings.ADMIN_EMAIL_RECIPIENT], fail_silently=False)
-            return True
-        except SMTPException as e:
-            logger.error("Mail send failed: %s", e)
-            self.add_error(None, ValidationError("Could not send mail"))
-            return False
-
     class Meta:
         model = ContactSubmission
         fields = ["email", "name", "message"]

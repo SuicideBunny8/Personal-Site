@@ -3,6 +3,6 @@
     <a href="{{ post.get_absolute_url }}"><img src="{{ post.banner.url }}" class="banner"></a>
     {% endif %}
     <a href="{{ post.get_absolute_url }}"><h3>{{ post.title|title }}</h3></a>
-        {{ post.short_text|safe }}
+        {{ post.short_text }}
     <p><a href="{{ post.get_absolute_url }}">Read More</a></p>
 </div>

@@ -15,7 +15,6 @@ class ContactView(View):
     def post(self, request):
         bound_form = self.form_class(request.POST)
         if bound_form.is_valid():
-            # mail_sent = bound_form.send()
             ContactSubmission.objects.create(
                 name=bound_form.cleaned_data['name'],
                 email=bound_form.cleaned_data['email'],

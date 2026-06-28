@@ -32,7 +32,9 @@ SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 # add to activate script `export DJANGO_DEBUG=True`
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['127.0.0.1', DOMAIN_NAME, '192.168.1.194']
+ALLOWED_HOSTS = ['127.0.0.1', DOMAIN_NAME]
+if DEBUG:
+    ALLOWED_HOSTS += ['192.168.1.194']
 
 INTERNAL_IPS = ['127.0.0.1']
 
@@ -244,7 +246,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ##### Email settings #####
 # https://docs.djangoproject.com/en/5.1/topics/email/
 if DEBUG: EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" # Console print
-# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend" # Default backend, implicitely inherited unless otherwise specified
+else:     EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend" # Default backend, implicitely inherited unless otherwise specified
+
 ADMIN_EMAIL_RECIPIENT='me@' + DOMAIN_NAME
 SERVER_EMAIL = "contact@" + DOMAIN_NAME 
 DEFAULT_FROM_EMAIL = "no-reply@" + DOMAIN_NAME
@@ -298,5 +301,5 @@ CKEDITOR_5_CONFIGS = {
 
 
 # Define a constant in settings.py to specify file upload permissions
-CKEDITOR_5_FILE_UPLOAD_PERMISSION = "authenticated"  # Possible values: "staff", "authenticated", "any"
-CKEDITOR_5_ALLOW_ALL_FILE_TYPES = True
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"  # Possible values: "staff", "authenticated", "any"
+CKEDITOR_5_ALLOW_ALL_FILE_TYPES = False

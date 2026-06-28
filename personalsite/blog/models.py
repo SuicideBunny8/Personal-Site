@@ -134,13 +134,26 @@ class Post(models.Model):
         return reverse('post_view', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
-        self.short_text = ' '.join(strip_tags(self.text).split()[:40]) + '...'
+        short_text_length = 40
+
+        text_splt = strip_tags(self.text).split()
+        if text_splt.length > short_text_length:
+            self.short_text = ' '.join(text_splt[:short_text_length]) + '...'
+        else:
+            self.short_text = ' '.join(text_splt)
+
+        # default meta title
         if not self.meta_title:
             self.meta_title = self.title[:60]
+
+        # default meta description
+        if not self.meta_description:
+            self.meta_description = self.short_text
+
         super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
 
     def __repr__(self):
-        return self.__str__()
+        return f"<Post id={self.pk} slug={self.slug} status={self.status}>"

@@ -16,8 +16,8 @@ class PostAdminForm(forms.ModelForm):
           }
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'pub_date')
-    list_filter = ('title', 'pub_date')
+    list_display = ('title', 'pub_date', 'status')
+    list_filter = ('status', 'pub_date')
     search_fields = ('title',)
     prepopulated_fields  = {"slug": ("title",)}
     filter_horizontal = ('tags',)

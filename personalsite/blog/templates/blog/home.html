@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 {% extends "base.html" %}
 {% block title %}EM's Blog Home{% endblock %}
 {% block description %}Blog Homepage for Emela's Tech Projects, Maker, Electronics, 3D Printing, DIY{% endblock %}
@@ -19,5 +17,5 @@
         {% include "blog/post_list_preview.html" with post=post_obj %}
     {% endfor %}
 </div>
-<a href="#"><h2>More posts...</h2></a>
+<a href="{% url 'post_list_view' %}"><h2>More posts...</h2></a>
 {% endblock content %}

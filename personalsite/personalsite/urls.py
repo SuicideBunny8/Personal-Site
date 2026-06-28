@@ -35,9 +35,11 @@ from .sitemaps import sitemaps as sitemaps_dict
 import os
 
 
+admin_url = os.environ['DJANGO_ADMIN_URL']
+
 urlpatterns = [
     path('admin/'  , include('admin_honeypot.urls', namespace='admin_honeypot')), # honeypot URL
-    path(os.environ.get('DJANGO_ADMIN_URL', 'elephant-pants') + '/', admin.site.urls), # import from secrets so not exposed on git
+    path(admin_url + '/', admin.site.urls), # import from secrets so not exposed on git
     path('', include("blog.urls")),
     # ckeditor 5
     path("ckeditor5/", include('django_ckeditor_5.urls')),

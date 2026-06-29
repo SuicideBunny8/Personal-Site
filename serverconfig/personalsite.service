@@ -1,0 +1,25 @@
+[Unit]
+Description=Gunicorn instance for personalsite
+After=network.target postgresql-18.service
+Wants=postgresql-18.service
+
+[Service]
+User=personalsite
+Group=personalsite
+WorkingDirectory=/opt/personalsite/app
+EnvironmentFile=/etc/personalsite/env
+RuntimeDirectory=gunicorn
+ExecStart=/opt/personalsite/env/bin/gunicorn \
+  personalsite.wsgi:application \
+  --bind unix:/run/gunicorn/personalsite.sock \
+  --workers 3 \
+  --timeout 60 \
+  --access-logfile /var/log/personalsite/access.log \
+  --error-logfile /var/log/personalsite/error.log
+Restart=on-failure
+RestartSec=5s
+PrivateTmp=yes
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target

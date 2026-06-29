@@ -13,10 +13,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 
 from pathlib import Path
-from .log_filters import ManageSQLFilter
+from ..log_filters import ManageSQLFilter
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 DOMAIN_NAME = 'emelavm.com'
 
 # Quick-start development settings - unsuitable for production
@@ -28,13 +28,7 @@ DOMAIN_NAME = 'emelavm.com'
 #   print(get_random_secret_key())
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
-# debug run must be set in python virtual environment
-# add to activate script `export DJANGO_DEBUG=True`
-DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
-
 ALLOWED_HOSTS = ['127.0.0.1', DOMAIN_NAME]
-if DEBUG:
-    ALLOWED_HOSTS += ['192.168.1.194']
 
 INTERNAL_IPS = ['127.0.0.1']
 
@@ -69,33 +63,22 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if DEBUG:
-    INSTALLED_APPS += ['debug_toolbar']
-    MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
-
 CSRF_COOKIE_NAME = "csrftoken"
-#CSRF_HEADER_NAME = "X-CSRFToken" # removed for ckeditor 5 uploading
 
 ROOT_URLCONF = 'personalsite.urls'
 
 SITE_ID = 1
 
-#"""
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_BROWSER_XSS_FILTER = True
-    X_FRAME_OPTIONS = 'DENY'
-#"""
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CSRF_TRUSTED_ORIGINS = [
+    'https://' + DOMAIN_NAME,
+    'https://www.' + DOMAIN_NAME,
+]
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR/'templates'],
-        #'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -103,12 +86,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'personalsite.context_processors.admin_email',
-            ],
-            "loaders": [
-                #("django.template.loaders.cached.Loader", [ # TODO: uncomment these for deploy
-                    "django.template.loaders.filesystem.Loader",
-                    "django.template.loaders.app_directories.Loader",
-                #]),
             ],
         },
     },
@@ -151,24 +128,6 @@ LOGGING = {
     }
 }
 
-##### Database #####
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'personalsite',
-        'USER': 'django_user',
-        'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-    # {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-}
-
 
 ##### S3 Storage #####
 STORAGES = {
@@ -199,8 +158,6 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/resources/'
-#STATIC_ROOT = BASE_DIR / 'static-files'
-STATIC_ROOT = Path('/var/www/personalsite/static/')
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
@@ -228,13 +185,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
-
 
 
 ###### Default primary key field type #####
@@ -245,9 +198,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ##### Email settings #####
 # https://docs.djangoproject.com/en/5.1/topics/email/
-if DEBUG: EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" # Console print
-else:     EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend" # Default backend, implicitely inherited unless otherwise specified
-
 ADMIN_EMAIL_RECIPIENT='me@' + DOMAIN_NAME
 SERVER_EMAIL = "contact@" + DOMAIN_NAME 
 DEFAULT_FROM_EMAIL = "no-reply@" + DOMAIN_NAME
@@ -256,8 +206,6 @@ DEFAULT_SUBJECT_PREFIX = 'Testing'
 MANAGERS = (
     ('Us', ADMIN_EMAIL_RECIPIENT)
 )
-
-
 
 
 ##### CKEditor settings #####
@@ -278,7 +226,7 @@ CKEDITOR_5_CONFIGS = {
                     ],
             'shouldNotGroupWhenFull': 'true'
         },
-        'image': { # todo
+        'image': {
             'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
                         'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side',  '|'],
             'styles': [

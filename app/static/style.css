@@ -82,12 +82,12 @@ figure.image {
         margin-right: auto;
     }
 
-    & .image-style-align-center {
+    &.image-style-align-center {
         margin-left: auto;
         margin-right: auto;
     }
 
-    &.image.image_resized {
+    &.image_resized {
         margin: .9em auto;
     }
 }

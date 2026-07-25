@@ -65,6 +65,33 @@ p {
     }
 }
 
+/* inline lisplay images from rich text editor */
+figure img {
+    width: 100%;
+    height: auto;
+}
+
+figure.image {
+    &.image-style-align-left {
+        float: left;
+        margin-left: auto;
+    }
+
+    &.image-style-align-right {
+        float: right;
+        margin-right: auto;
+    }
+
+    & .image-style-align-center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &.image.image_resized {
+        margin: .9em auto;
+    }
+}
+
 form {
     table {
       border-spacing: 10px;

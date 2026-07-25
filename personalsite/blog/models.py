@@ -82,13 +82,13 @@ class Post(models.Model):
     banner = models.ImageField(
         upload_to=banner_upload_path,
         blank=True,
-        help_text = "Image to be displayed on featured cards and at the top of post pages."
+        help_text = "Image to be displayed on featured cards and at the top of post pages. 3:1"
         )
     
     icon = models.ImageField(
         upload_to=icon_upload_path,
         blank=False,
-        help_text = "Image to be displayed in post list cards"
+        help_text = "Image to be displayed in post list cards. 1:1"
         )
     
     # html meta fields
@@ -137,7 +137,7 @@ class Post(models.Model):
         short_text_length = 40
 
         text_splt = strip_tags(self.text).split()
-        if text_splt.length > short_text_length:
+        if len(text_splt) > short_text_length:
             self.short_text = ' '.join(text_splt[:short_text_length]) + '...'
         else:
             self.short_text = ' '.join(text_splt)
